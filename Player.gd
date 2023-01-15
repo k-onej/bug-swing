@@ -7,7 +7,8 @@ export var speed := 100.0
 
 export var jump_strength := 150.0
 export var max_jumps := 1
-export var gravity = 400.0
+export var gravity := 400.0
+export var max_fall_speed := 400.0
 
 var current_jumps := 0
 var velocity := Vector2.ZERO
@@ -40,6 +41,9 @@ func _physics_process(delta: float) -> void:
 	if  not is_zero_approx(velocity.x):
 		sprite.scale.x = -sign(velocity.x)
 	
+	if velocity.y > max_fall_speed:
+		velocity.y = max_fall_speed
+	
 	if is_jumping:
 		sprite.play("jump")
 	elif is_running:
@@ -47,4 +51,5 @@ func _physics_process(delta: float) -> void:
 	elif is_idle:
 		sprite.play("idle")
 	
-	velocity = move_and_slide(velocity, UP_DIRECTION)
+	print(velocity)
+	velocity = move_and_slide(velocity, UP_DIRECTION, false, 4, PI/4, false)

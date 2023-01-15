@@ -2,7 +2,7 @@ extends Node2D
 
 
 var RopePiece = preload("res://RopePiece.tscn")
-var piece_length := 4.0
+var piece_length := 6.0
 var rope_parts := []
 var rope_points : PoolVector2Array = []
 
@@ -61,6 +61,3 @@ func get_rope_points() -> void:
 	for r in rope_parts:
 		rope_points.append(r.global_position)
 	rope_points.append(rope_end_joint.global_position)
-
-func _draw():
-	draw_polyline(rope_points, Color.black)
